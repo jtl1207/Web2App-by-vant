@@ -66,9 +66,5 @@ jobs:
           tag_name: ${{ steps.tag_step.outputs.tag_name }}
           files: |
             WebApkShell/app/build/outputs/apk/release/*.apk
-          name: "Release ${{ steps.tag_step.outputs.tag_name }}"
-          body: |
-            🚀 自动构建版本：${{ steps.tag_step.outputs.tag_name }}
-            📅 构建时间：${{ github.run_started_at }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
