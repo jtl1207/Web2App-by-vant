@@ -3,6 +3,25 @@
 ## [Unreleased] - 2026-02-15
 
 ### Added / 新增功能
+- ✅ **自动网页图标 / Auto Favicon Icon**: 应用现在自动使用网站的 favicon 作为最近应用屏幕中的图标
+  - 使用 WebChromeClient 的 `onReceivedIcon` 回调捕获网站 favicon
+  - 动态设置任务描述图标
+  - 无需手动配置
+  - App now automatically uses website's favicon as icon in recent apps screen
+  - Uses WebChromeClient's `onReceivedIcon` callback to capture website favicon
+  - Dynamically sets task description icon
+  - No manual configuration needed
+
+- ✅ **屏幕旋转支持 / Screen Rotation Support**: 修复了屏幕旋转时的异常刷新问题
+  - 添加 `android:configChanges="orientation|screenSize|keyboardHidden"` 到 AndroidManifest
+  - 防止旋转时 Activity 重新创建
+  - 视频可以正确进入全屏和放大模式
+  - 保持页面状态和表单数据
+  - Added `android:configChanges="orientation|screenSize|keyboardHidden"` to AndroidManifest
+  - Prevents Activity recreation on rotation
+  - Videos can properly enter fullscreen and zoom mode
+  - Preserves page state and form data
+
 - ✅ **白屏问题修复 / White Screen Fix**: 添加了完整的错误处理机制
   - 当网页无法加载时，显示友好的错误页面而不是空白屏幕
   - 错误页面包含"重新加载"按钮，用户可以重试
@@ -62,6 +81,7 @@
 #### MainActivity.kt 修改 / Modifications
 1. **新增导入 / New Imports**:
    ```kotlin
+   import android.webkit.WebChromeClient
    import android.webkit.WebResourceRequest
    import android.webkit.WebResourceError
    import android.graphics.Bitmap
@@ -72,11 +92,22 @@
    - `onPageStarted()` - 页面开始加载时调用
    - `onPageFinished()` - 页面加载完成时调用
    - `onReceivedError()` - 接收到错误时调用，显示错误页面
+   - `onReceivedIcon()` - 接收到网站 favicon 时调用，设置应用图标
+
+3. **WebChromeClient 支持 / WebChromeClient Support**:
+   - 添加 WebChromeClient 以捕获网站 favicon
+   - 使用 `setTaskDescription()` 动态更新最近应用图标
+   - 自动使用网站 favicon 作为应用图标
 
 3. **改进的 URL 验证 / Improved URL Validation**:
    - `shouldOverrideUrlLoading()` 方法中的严格域名检查
    - 支持配置的域名及其所有子域名
    - 阻止并通知用户被拦截的外部链接
+
+#### AndroidManifest.xml 修改 / Modifications
+- 添加 `android:configChanges="orientation|screenSize|keyboardHidden"` 到 MainActivity
+- 防止屏幕旋转时 Activity 重新创建
+- 确保视频播放和全屏功能正常工作
 
 #### 错误页面设计 / Error Page Design
 - 响应式设计，适配各种屏幕尺寸
