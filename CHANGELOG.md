@@ -99,7 +99,7 @@
    - 使用 `setTaskDescription()` 动态更新最近应用图标
    - 自动使用网站 favicon 作为应用图标
 
-3. **改进的 URL 验证 / Improved URL Validation**:
+4. **改进的 URL 验证 / Improved URL Validation**:
    - `shouldOverrideUrlLoading()` 方法中的严格域名检查
    - 支持配置的域名及其所有子域名
    - 阻止并通知用户被拦截的外部链接

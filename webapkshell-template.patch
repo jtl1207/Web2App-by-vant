@@ -99,7 +99,7 @@ index 57bb7ab..a785f22 100644
 +                    
 +                    // Strict domain validation - ALLOWED_DOMAINS will be replaced by build script
 +                    // Only allow exact domain or subdomains (not just contains)
-+                    val allowedDomains = listOf("__ALLOWED_DOMAINS__")
++                    val allowedDomains = listOf(__ALLOWED_DOMAINS__)
 +                    val isAllowed = allowedDomains.any { domain ->
 +                        host == domain || host.endsWith(".$domain")
 +                    }
