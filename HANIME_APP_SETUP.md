@@ -47,8 +47,14 @@ override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceReques
         val url = it.url.toString()
         val host = it.url.host ?: ""
         
-        // Allow navigation only within hanime1.me domain
-        if (host.contains("hanime1.me") || host.isEmpty()) {
+        // Allow safe about: schemes
+        if (url.startsWith("about:blank")) {
+            return false
+        }
+        
+        // Strict domain validation for hanime1.me
+        // Only allow exact domain or subdomains (not just contains)
+        if (host == "hanime1.me" || host.endsWith(".hanime1.me")) {
             // Allow the URL to load
             return false
         } else {
