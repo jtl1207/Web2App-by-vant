@@ -1,11 +1,26 @@
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+index c1417f6..d38b700 100644
+--- a/app/src/main/AndroidManifest.xml
++++ b/app/src/main/AndroidManifest.xml
+@@ -29,7 +29,8 @@
+             android:name=".MainActivity"
+             android:exported="true"
+             android:icon="${appIcon}"
+-            android:roundIcon="${appIcon}">
++            android:roundIcon="${appIcon}"
++            android:configChanges="orientation|screenSize|keyboardHidden">
+             <!--            android:theme="${appSplash}"-->
+             <intent-filter>
+                 <action android:name="android.intent.action.MAIN" />
 diff --git a/app/src/main/java/com/qcp/androidshell/MainActivity.kt b/app/src/main/java/com/qcp/androidshell/MainActivity.kt
-index 57bb7ab..GENERIC 100644
+index 57bb7ab..a785f22 100644
 --- a/app/src/main/java/com/qcp/androidshell/MainActivity.kt
 +++ b/app/src/main/java/com/qcp/androidshell/MainActivity.kt
-@@ -8,6 +8,10 @@ import android.view.View
+@@ -8,6 +8,11 @@ import android.view.View
  import android.webkit.JavascriptInterface
  import android.webkit.WebView
  import android.webkit.WebViewClient
++import android.webkit.WebChromeClient
 +import android.webkit.WebResourceRequest
 +import android.webkit.WebResourceError
 +import android.graphics.Bitmap
@@ -13,7 +28,7 @@ index 57bb7ab..GENERIC 100644
  import androidx.appcompat.app.AppCompatActivity
  import kotlinx.coroutines.runBlocking
  import java.io.InputStream
-@@ -58,6 +62,87 @@ class MainActivity : AppCompatActivity() {
+@@ -58,6 +63,87 @@ class MainActivity : AppCompatActivity() {
  
          webView = WebView(this)
          webView.webViewClient = object : WebViewClient() {
@@ -101,7 +116,29 @@ index 57bb7ab..GENERIC 100644
  //            override fun shouldInterceptRequest(
  //                view: WebView,
  //                request: WebResourceRequest
-@@ -110,7 +195,8 @@ class MainActivity : AppCompatActivity() {
+@@ -88,6 +174,21 @@ class MainActivity : AppCompatActivity() {
+ //
+ //            }
+         }
++        
++        // Add WebChromeClient to capture favicon and set as app icon
++        webView.webChromeClient = object : WebChromeClient() {
++            override fun onReceivedIcon(view: WebView?, icon: Bitmap?) {
++                super.onReceivedIcon(view, icon)
++                icon?.let {
++                    // Set the favicon as the task description icon (recent apps screen)
++                    setTaskDescription(android.app.ActivityManager.TaskDescription(
++                        getString(R.string.app_name),
++                        it,
++                        0
++                    ))
++                }
++            }
++        }
+         webView.scrollBarSize = 0
+         webView.overScrollMode = View.OVER_SCROLL_NEVER
+ 
+@@ -110,7 +211,8 @@ class MainActivity : AppCompatActivity() {
          }
  
          webView.addJavascriptInterface(JsObject(), "shell")
@@ -110,4 +147,5 @@ index 57bb7ab..GENERIC 100644
 +//        webView.loadUrl("file:///android_asset/index.html")
  //        webView.loadUrl("http://192.168.185.36:8686/#/")
          setContentView(webView)
+ 
 
