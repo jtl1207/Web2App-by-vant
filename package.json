@@ -12,10 +12,10 @@
     "build:site": "pnpm --dir ./packages/vant build:site"
   },
   "webApkShell": {
-    "build_script": "pnpm run build:site",
+    "build_script": "",
     "dist_path": "./packages/vant/site-dist",
-    "AP_ID": "com.t.vant",
-    "AP_NAME": "VANT",
+    "AP_ID": "com.hanime1.app",
+    "AP_NAME": "热爱的",
     "AP_VERSION_NAME": ""
   },
   "nano-staged": {
