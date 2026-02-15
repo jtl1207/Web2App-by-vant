@@ -1,5 +1,5 @@
 {
-  "appName": "jable",
+  "appName": "missav",
   "packageId": "com.missav.app",
   "appUrl": "https://missav.ws/",
   "allowedDomains": ["missav.ws","cloudflare.com"],
