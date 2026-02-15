@@ -12,6 +12,12 @@
 **White Screen Fix / 白屏修复**: This version includes automatic error handling. If the app cannot load your website, it will show a user-friendly error page with a retry button instead of a blank white screen.  
 **白屏修复**: 此版本包含自动错误处理。如果应用无法加载您的网站，它将显示一个用户友好的错误页面和重试按钮，而不是空白屏幕。
 
+**Auto Favicon Icon / 自动网页图标**: The app automatically uses the website's favicon as the app icon in the recent apps screen (task switcher). No manual configuration needed!  
+**自动网页图标**: 应用会自动使用网站的 favicon 作为最近应用屏幕（任务切换器）中的应用图标。无需手动配置！
+
+**Screen Rotation Support / 屏幕旋转支持**: The app properly handles screen rotation without refreshing the page. Video playback and fullscreen features work correctly when rotating the device.  
+**屏幕旋转支持**: 应用正确处理屏幕旋转而不会刷新页面。旋转设备时，视频播放和全屏功能可以正常工作。
+
 **Icon Setup / 图标设置**: See [ICON_SETUP.md](ICON_SETUP.md) for detailed instructions on customizing your app icon.  
 **图标设置**: 查看 [ICON_SETUP.md](ICON_SETUP.md) 了解自定义应用图标的详细说明。
 
@@ -116,6 +122,9 @@ bun run build:app
   - `evil.com`
   - `ads.network.com`
   - All other domains / 所有其他域名
+  
+  ⚠️ **Cloudflare Users / Cloudflare 用户注意**: If your website uses Cloudflare for CDN or protection, you may need to add `"cloudflare.com"` to allowedDomains to prevent blocking Cloudflare-hosted resources.  
+  **如果您的网站使用 Cloudflare 作为 CDN 或保护服务，您可能需要将 `"cloudflare.com"` 添加到 allowedDomains 中，以防止拦截 Cloudflare 托管的资源。**
 
 ---
 
@@ -191,6 +200,46 @@ See [FAQ.md](FAQ.md) for detailed troubleshooting steps.
 ### How to set custom icon? / 如何设置自定义图标？
 See [ICON_SETUP.md](ICON_SETUP.md) for detailed icon setup guide.  
 查看 [ICON_SETUP.md](ICON_SETUP.md) 了解详细的图标设置指南。
+
+### Do I need to whitelist cloudflare.com? / 需要将 cloudflare.com 加入白名单吗？
+**Yes, if your website uses Cloudflare.** / **如果您的网站使用 Cloudflare，则需要。**
+
+If your website is protected by or uses Cloudflare CDN, add `"cloudflare.com"` to `allowedDomains`:  
+如果您的网站受 Cloudflare 保护或使用 Cloudflare CDN，请将 `"cloudflare.com"` 添加到 `allowedDomains`：
+
+```json
+{
+  "appName": "My App",
+  "packageId": "com.myapp.app",
+  "appUrl": "https://mywebsite.com",
+  "allowedDomains": ["mywebsite.com", "cloudflare.com"]
+}
+```
+
+This prevents the app from blocking Cloudflare's challenge pages, verification, and CDN resources.  
+这可以防止应用拦截 Cloudflare 的验证页面、检查和 CDN 资源。
+
+### Does the app icon automatically update from the website? / 应用图标会自动从网站更新吗？
+**Yes!** / **是的！**
+
+The app automatically captures and uses the website's favicon as the icon in the recent apps screen (task switcher). This happens dynamically when you load the website.  
+应用会自动捕获并使用网站的 favicon 作为最近应用屏幕（任务切换器）中的图标。这会在您加载网站时动态发生。
+
+Note: The launcher icon (home screen icon) is still set from your app configuration, but the recent apps icon will show your website's favicon.  
+注意：启动器图标（主屏幕图标）仍然从您的应用配置中设置，但最近应用图标将显示您网站的 favicon。
+
+### Does the app support screen rotation? / 应用支持屏幕旋转吗？
+**Yes!** / **是的！**
+
+The app properly handles screen rotation without reloading the page. This is especially important for:  
+应用正确处理屏幕旋转而不会重新加载页面。这对以下情况特别重要：
+
+- Video playback and fullscreen mode / 视频播放和全屏模式
+- Form data preservation / 表单数据保留
+- Maintaining scroll position / 保持滚动位置
+
+The app uses `android:configChanges="orientation|screenSize|keyboardHidden"` to handle rotation events smoothly.  
+应用使用 `android:configChanges="orientation|screenSize|keyboardHidden"` 来平滑处理旋转事件。
 
 **For more questions, see [FAQ.md](FAQ.md) / 更多问题请查看 [FAQ.md](FAQ.md)**
 
