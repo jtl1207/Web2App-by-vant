@@ -7,6 +7,16 @@
 
 ## 🚀 Quick Start / 快速开始
 
+### ⚠️ Important Notes / 重要说明
+
+**White Screen Fix / 白屏修复**: This version includes automatic error handling. If the app cannot load your website, it will show a user-friendly error page with a retry button instead of a blank white screen.  
+**白屏修复**: 此版本包含自动错误处理。如果应用无法加载您的网站，它将显示一个用户友好的错误页面和重试按钮，而不是空白屏幕。
+
+**Icon Setup / 图标设置**: See [ICON_SETUP.md](ICON_SETUP.md) for detailed instructions on customizing your app icon.  
+**图标设置**: 查看 [ICON_SETUP.md](ICON_SETUP.md) 了解自定义应用图标的详细说明。
+
+---
+
 ### Step 1: Fork and Clone / 第一步：分支并克隆
 
 ```bash
