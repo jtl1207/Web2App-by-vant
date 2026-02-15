@@ -141,7 +141,10 @@ This repository includes GitHub Actions for automatic APK building:
 3. Release created with APK / 创建包含 APK 的 Release
 
 See `.github/workflows/android.yml` for details.  
-详见 `.github/workflows/android.yml`
+详见 `.github/workflows/android.yml`  
+ 
+Use cloud workspaces to quickly compile your app online  
+使用 workspaces in the cloud 即可在线快速编译APP  
 
 ---
 
