@@ -22,6 +22,10 @@
 
 ---
 
+> 📱 **WebView 应用构建器**：本仓库还包含一个将任何网站打包为 Android 应用的工具。详见 [WEBVIEW_APP_README.md](./WEBVIEW_APP_README.md)
+
+---
+
 ### 介绍
 
 Vant 是一个**轻量、可定制的移动端组件库**，于 2017 年开源。

@@ -26,6 +26,10 @@
 
 ---
 
+> 📱 **WebView App Builder**: This repository also includes a tool to package any website as an Android app. See [WEBVIEW_APP_README.md](./WEBVIEW_APP_README.md) for details.
+
+---
+
 ## Features
 
 - 🚀 1KB Component average size (min+gzip)
