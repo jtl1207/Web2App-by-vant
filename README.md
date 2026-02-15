@@ -116,6 +116,9 @@ bun run build:app
   - `evil.com`
   - `ads.network.com`
   - All other domains / 所有其他域名
+  
+  ⚠️ **Cloudflare Users / Cloudflare 用户注意**: If your website uses Cloudflare for CDN or protection, you may need to add `"cloudflare.com"` to allowedDomains to prevent blocking Cloudflare-hosted resources.  
+  **如果您的网站使用 Cloudflare 作为 CDN 或保护服务，您可能需要将 `"cloudflare.com"` 添加到 allowedDomains 中，以防止拦截 Cloudflare 托管的资源。**
 
 ---
 
@@ -191,6 +194,24 @@ See [FAQ.md](FAQ.md) for detailed troubleshooting steps.
 ### How to set custom icon? / 如何设置自定义图标？
 See [ICON_SETUP.md](ICON_SETUP.md) for detailed icon setup guide.  
 查看 [ICON_SETUP.md](ICON_SETUP.md) 了解详细的图标设置指南。
+
+### Do I need to whitelist cloudflare.com? / 需要将 cloudflare.com 加入白名单吗？
+**Yes, if your website uses Cloudflare.** / **如果您的网站使用 Cloudflare，则需要。**
+
+If your website is protected by or uses Cloudflare CDN, add `"cloudflare.com"` to `allowedDomains`:  
+如果您的网站受 Cloudflare 保护或使用 Cloudflare CDN，请将 `"cloudflare.com"` 添加到 `allowedDomains`：
+
+```json
+{
+  "appName": "My App",
+  "packageId": "com.myapp.app",
+  "appUrl": "https://mywebsite.com",
+  "allowedDomains": ["mywebsite.com", "cloudflare.com"]
+}
+```
+
+This prevents the app from blocking Cloudflare's challenge pages, verification, and CDN resources.  
+这可以防止应用拦截 Cloudflare 的验证页面、检查和 CDN 资源。
 
 **For more questions, see [FAQ.md](FAQ.md) / 更多问题请查看 [FAQ.md](FAQ.md)**
 

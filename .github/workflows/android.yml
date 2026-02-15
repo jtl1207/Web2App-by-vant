@@ -90,8 +90,10 @@ jobs:
       - name: Create date tag
         id: tag_step
         run: |
+          # Read app name from config
+          APP_NAME=$(cat app-config.json | grep -o '"appName"[[:space:]]*:[[:space:]]*"[^"]*"' | cut -d'"' -f4)
           DATE=$(date +'%Y%m%d-%H%M%S')
-          TAG="v${DATE}"
+          TAG="${APP_NAME}-v${DATE}"
           echo "生成 Tag: $TAG"
 
           git config user.name "github-actions[bot]"
