@@ -92,7 +92,7 @@ jobs:
       - name: Build with Gradle
         run: |
           cp WebApkShell/genApk.ts .
-          # Retry logic for Gradle build
+          # Retry logic for Gradle build (longer delay due to build complexity)
           max_attempts=3
           attempt=0
           until [ $attempt -ge $max_attempts ]; do
